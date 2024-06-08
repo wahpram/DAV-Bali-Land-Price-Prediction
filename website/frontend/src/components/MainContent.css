@@ -1,0 +1,39 @@
+/* src/components/MainContent.css */
+.main-content {
+    width: 80%;
+    max-width: 1200px;
+    height: max-content;
+    margin: 20px 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* src/components/MainContent.css */
+.main-content-back {
+    width: 100%;
+    max-width: 1200px;
+    /* height: max-content; */
+    margin: 20px 30px;
+    padding: 20px;
+    background-color: #e8e8e9;
+
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .maincontent-box-1 {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* White background for the bounding box */
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
+    margin-bottom: 10px;
+    margin-left: 70px;
+    margin-right: 70px;
+  }
+  
