@@ -1,0 +1,35 @@
+/* src/components/Carousel.css */
+.carousel .slide {
+  background: none;
+}
+
+.carousel .control-arrow {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.carousel .legend {
+  background: rgba(0, 0, 0, 0.5);
+  color: rgb(82, 82, 82);
+  font-size: 16px;
+  padding: 10px;
+}
+
+.carousel .control-dots {
+  color: #2d2d2d;
+  position: inherit;
+  bottom: 0;
+  margin: 10px ;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.carousel .control-dots .dot{
+  color:#2d2d2d;
+  background: #2d2d2d;
+}
+
+.carousel .carousel-status{
+  display: none;
+}

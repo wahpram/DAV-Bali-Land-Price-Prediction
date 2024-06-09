@@ -4,15 +4,18 @@ import Chart from './Chart';
 import './MainContent.css';
 import AnalyticCard from './AnalyticCard';
 import SummaryTab from './SummaryTab';
+import CustomCarousel from './Carousel';
+
 
 import sidebarLogo from '../assets/landit.png'; // Add your sidebar logo image in the assets folder
 import sidebarLogo2 from '../assets/react.svg'; // Add your sidebar logo image in the assets folder
 
+
 const analyticData = [
-  { title: 'Average Land Price in Bali', value: "$54,000", image: sidebarLogo },
-  { title: 'Land Prices Checked This Month', value: "2,300", image: sidebarLogo2 },
-  { title: 'New Lands', value: "2,300", image: sidebarLogo2 },
-  { title: 'Land Sold This Month', value: "573", image: sidebarLogo2 },
+  { title: 'Average Land Price in Bali', value: "$54,000", image: "https://img.icons8.com/ios-filled/100/FFFFFf/money-bag.png" },
+  { title: 'Land Prices Checked This Month', value: "2,300", image: "https://img.icons8.com/ios-filled/50/FFFFFf/nui2.png" },
+  { title: 'New Lands', value: "2,300", image: "https://img.icons8.com/ios-filled/50/FFFFFF/country.png" },
+  { title: 'Land Sold This Month', value: "573", image: "https://img.icons8.com/ios-glyphs/30/FFFFFf/handshake--v1.png" },
 ];
 
 const priceOverview = [
@@ -51,7 +54,7 @@ const MainContent = () => {
       <div className="main-content-container">
         <div className="main-content">
           <h2>Price Chart</h2>
-          <Chart />
+            <CustomCarousel />
         </div>
 
         <div className='SummaryTab'>
