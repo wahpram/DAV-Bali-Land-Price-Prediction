@@ -1,39 +1,66 @@
 /* src/components/MainContent.css */
 .main-content {
-    width: 80%;
-    max-width: 1200px;
+    width: 70%;
     height: max-content;
-    margin: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* src/components/MainContent.css */
-.main-content-back {
-    width: 100%;
-    max-width: 1200px;
-    /* height: max-content; */
-    margin: 20px 30px;
+  .main-content-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.base {
+    width: 80%;
+    margin: 35px 5px;
     padding: 20px;
     background-color: #e8e8e9;
-
-  }
-  
-  h1 {
-    margin-bottom: 20px;
+    
   }
 
   .maincontent-box-1 {
     display: flex;
     align-items: center;
-    background-color: #ffffff; /* White background for the bounding box */
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
-    margin-bottom: 10px;
-    margin-left: 70px;
-    margin-right: 70px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+
+  .AnalyticCard {
+    margin: 30px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    }
+
+    .SummaryTab {
+      width: 25%;
+      margin: 20px 0px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .SummaryTab h2{
+      margin-bottom: 2px;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #2d2d2d;
+    }
+
+    .SummaryTab h3{
+      margin-bottom: 15px;
+      font-weight: normal;
+      font-size: 0.9em;
+      color: #9f9d9d;
+    }
   

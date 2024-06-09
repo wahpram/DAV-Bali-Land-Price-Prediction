@@ -1,6 +1,6 @@
 /* src/components/Sidebar.css */
 .sidebar {
-    width: 350px;
+    width: 5 0px;
     background-color: #e8e8e9;
     /* background-color: #4a7eb3; */
     color: #2D3748;
@@ -43,16 +43,29 @@
     font-weight: bold;
   }
   
-  .sidebar-box-1 {
+  .sidebar-box-1-active {
     display: flex;
     align-items: center;
-    background-color: #ffffff; /* White background for the bounding box */
+    background-color: #f4f4f4; /* White background for the bounding box */
+    color: #2d2d2d;
     padding: 10px;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for better visibility */
     margin-bottom: 10px;
     margin-left: 70px;
-    margin-right: 70px;
+    margin-right: 40px;
+  }
+
+  .sidebar-box-1-inactive {
+    display: flex;
+    align-items: center;
+    background-color: #e8e8e9; /* White background for the bounding box */
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-left: 70px;
+    margin-right: 40px;
+    color: #9f9d9d;
   }
   
   .sidebar-box-2 {
