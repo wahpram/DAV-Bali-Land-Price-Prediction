@@ -1,0 +1,37 @@
+
+.AnalyticCard-box {
+    background-color:  #f9f9f9;
+    display: flex;
+    width: 350px;
+    padding: 15px 20px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.AnalyticCard-Text-Box-1 {
+    color: #9f9d9d;
+    font-weight: 500;
+    font-size: 0.8em;
+}
+
+.AnalyticCard-Text-Box-2 {
+    font-weight: bold;
+    font-size: 1em;
+    color: #2d2d2d;
+}
+
+.AnalyticCard-Image-Box {
+    background-color: #3ad3ce;
+    margin-left: auto; 
+    display: flex;
+    align-content: end;
+    padding: 10px 15px;
+    border-radius: 10px;
+  }
+
+.AnalyticCard-Image-Box img {
+    height: 30px;
+    width: auto;
+}

@@ -12,33 +12,19 @@ const Sidebar = () => {
         <span className="sidebar-title-1">LAND IT</span>
       </div>
       
-      <div className='sidebar-box-1'>
+      <div className='sidebar-box-1-active'>
         <div className='sidebar-box-2'>
           <img src={sidebarLogo2} className='sidebar-logo-2'/>
         </div>
         <span className="sidebar-title-2">Land Overview</span>
       </div>
       
-      <div className='sidebar-box-1'>
+      <div className='sidebar-box-1-inactive'>
         <div className='sidebar-box-2'>
           <img src={sidebarLogo2} className='sidebar-logo-2'/>
         </div>
         <span className="sidebar-title-2">Price Prediction</span>
       </div>
-
-      <div className='sidebar-box-1'>
-        <div className='sidebar-box-2'>
-          <img src={sidebarLogo2} className='sidebar-logo-2'/>
-        </div>
-        <span className="sidebar-title-2">Price Prediction</span>
-      </div>
-      
-      <div className='sidebar-box-1'>
-        <div className='sidebar-box-2'>
-          <img src={sidebarLogo2} className='sidebar-logo-2'/>
-        </div>
-        <span className="sidebar-title-2">Price Prediction</span>
-      </div>  
     </div>
   );
 };

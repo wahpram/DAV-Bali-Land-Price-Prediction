@@ -1,0 +1,38 @@
+.SummaryTab-box {
+    /* background-color:  #d24343; */
+    color: #2d2d2d;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: left;
+    /* justify-content: space-between; */
+    font-size: 0.9em;
+    border-bottom: 0.5px solid rgba(58, 211, 206, 0.2);
+}
+
+.SummaryTab-table-1 {
+    /* align-content: center; */
+    width: 50px;
+    margin-right: 20px;
+    /* background-color: aqua; */
+}
+
+.SummaryTab-table-2 {
+    /* background-color: rgb(58, 211, 206); */
+    margin-left: 20%; 
+    display: flex;
+    align-content: center;
+    align-self: center;
+    /* background-color: palegoldenrod; */
+}
+
+.SummaryTab-table-3 {
+    /* background-color: rgb(58, 211, 206); */
+    margin-left: auto; 
+    display: flex;
+    align-content: end;
+    align-self: center;
+    /* background-color: palegoldenrod; */
+    font-weight: bold;
+    color: #2d2d2d;
+}
