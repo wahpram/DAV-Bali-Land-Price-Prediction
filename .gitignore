@@ -3,3 +3,4 @@ configs/
 downloaded_files
 tree.txt
 *.pkl
+node_modules/
