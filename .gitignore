@@ -2,3 +2,4 @@ tests/
 configs/
 downloaded_files
 tree.txt
+*.pkl
