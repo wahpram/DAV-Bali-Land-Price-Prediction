@@ -9,10 +9,14 @@ from flask import jsonify, render_template, request
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 xgb_model = os.path.join(base_dir, '..', '..', '..', 'models', 'xgboost_model.pkl')
+rfr_model = os.path.join(base_dir, '..', '..', '..', 'models', 'rfr_model.pkl')
+mlr_model = os.path.join(base_dir, '..', '..', '..', 'models', 'mlr_model.pkl')
 subdistrict_label_encoder = os.path.join(base_dir, '..', '..', '..', 'models', 'subdistrict_encode.pkl')
 regency_label_encoder = os.path.join(base_dir, '..', '..', '..', 'models', 'regency_encode.pkl')
 
 xgb_model = joblib.load(xgb_model)
+rfr_model = joblib.load(rfr_model)
+mlr_model = joblib.load(mlr_model)
 subdistrict_label_encoder = joblib.load(subdistrict_label_encoder)
 regency_label_encoder = joblib.load(regency_label_encoder)
 
@@ -81,20 +85,13 @@ def prediction():
         
         day = data.get('day')
         month = data.get('month')
-        year = data.get('year')
         regency = data.get('regency')
         subdistrict = data.get('subdistrict')
         
-        if not all([day, month, year, regency, subdistrict]):
+        if not all([day, month, regency, subdistrict]):
             return jsonify({'error': 'Invalid input data'}), 400
         
-        try:
-            date = datetime.datetime(int(year), int(month), int(day))
-        except ValueError as e:
-            return jsonify({"error": str(e)}), 400
-        
         new_data = {
-            'year': [year],
             'month': [month],
             'day': [day],
             'subdistrict': [subdistrict],
@@ -106,16 +103,26 @@ def prediction():
         new_df['subdistrict_encoded'] = new_df['subdistrict'].apply(lambda x: subdistrict_label_encoder.get(x, -1))
 
         new_df.drop(['subdistrict', 'regency'], axis=1, inplace=True)
-
-        new_predictions = xgb_model.predict(new_df)
-        new_predictions = float(np.exp(new_predictions[0]))
         
-        # return jsonify({'date': date.strftime('%Y-%m-%d'),
-        #                 'prediction': new_predictions,
-        #                 'subdistrict': subdistrict,
-        #                 'regency': regency})
+        xgb_pred = xgb_model.predict(new_df)
+        xgb_pred = float(np.exp(xgb_pred[0]))
+        xgb_pred = format_rupiah(xgb_pred)
         
-        return jsonify({'prediction': new_predictions})
+        rfr_pred = rfr_model.predict(new_df)
+        rfr_pred = float(np.exp(rfr_pred[0]))
+        rfr_pred = format_rupiah(rfr_pred)
+        
+        mlr_pred = mlr_model.predict(new_df)
+        mlr_pred = float(np.exp(mlr_pred[0]))
+        mlr_pred = format_rupiah(mlr_pred)
+        
+        predictions = {
+            'xgb_pred': xgb_pred,
+            'rfr_pred': rfr_pred,
+            'mlr_pred': mlr_pred
+        }
+        
+        return jsonify(predictions)
     
     except Exception as e:
         return jsonify({'error': str(e)}), 400
