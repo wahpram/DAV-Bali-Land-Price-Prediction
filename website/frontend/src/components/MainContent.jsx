@@ -1,15 +1,8 @@
-// src/components/MainContent.jsx
-import React from 'react';
-import Chart from './Chart';
+import React, { useEffect, useState } from 'react';
 import './MainContent.css';
 import AnalyticCard from './AnalyticCard';
 import SummaryTab from './SummaryTab';
 import CustomCarousel from './Carousel';
-
-
-import sidebarLogo from '../assets/landit.png'; // Add your sidebar logo image in the assets folder
-import sidebarLogo2 from '../assets/react.svg'; // Add your sidebar logo image in the assets folder
-
 
 const analyticData = [
   { title: 'Average Land Price in Bali', value: "$54,000", image: "https://img.icons8.com/ios-filled/100/FFFFFf/money-bag.png" },
@@ -18,27 +11,53 @@ const analyticData = [
   { title: 'Land Sold This Month', value: "573", image: "https://img.icons8.com/ios-glyphs/30/FFFFFf/handshake--v1.png" },
 ];
 
-const priceOverview = [
-  { subdistrict: 'Subdistrict', regency: 'Regency', price: 'Price'},
-  { subdistrict: 'Ubud', regency: 'Gianyar', price: '300.200.000'},
-  { subdistrict: 'Denpasar Selatan', regency: 'Denpasar', price: '500.200.000'},
-  { subdistrict: 'Ubud', regency: 'Gianyar', price: '130.200.000'},
-  { subdistrict: 'Ubud', regency: 'Gianyar', price: '320.200.000'},
-  { subdistrict: 'Denpasar Selatan', regency: 'Denpasar', price: '900.200.000'},
-  { subdistrict: 'Ubud', regency: 'Gianyar', price: '50.200.000'},
-  { subdistrict: 'Denpasar Selatan', regency: 'Denpasar', price: '800.200.000'},
-  { subdistrict: 'Ubud', regency: 'Gianyar', price: '200.200.000'}
-];
-
-// const landforsaleOverview = [
-//   { subdistrict: 'Subdistrict', regency: 'Regency', total: 'Total'},
-//   { subdistrict: 'Ubud', regency: 'Gianyar', total: '51'},
-//   { subdistrict: 'Denpasar Selatan', regency: 'Denpasar', total: '32'},
-//   { subdistrict: 'Ubud', regency: 'Gianyar', total: '45'},
-//   { subdistrict: 'Ubud', regency: 'Gianyar', total: '32'}
-// ];
-
 const MainContent = () => {
+  const [datas, setDatas] = useState([]);
+  const [avgPriceTotal, setAvgPriceTotal] = useState([]);
+  const [avgPricePerM2, setAvgPricePerM2] = useState([]);
+
+  useEffect(() => {
+    fetchDatas();
+    fetchAvgPriceTotal();
+    fetchAvgPricePerM2();
+  }, []);
+
+  const fetchDatas = async () => {
+    const response = await fetch('http://127.0.0.1:5000/api/data');
+    const data = await response.json();
+    const sortedData = data.datas.sort((a, b) => a.price_per_m2 - b.price_per_m2);
+    setDatas(sortedData);
+  };
+
+  const fetchAvgPriceTotal = async () => {
+    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-total');
+    const data = await response.json();
+    const sortedData = data.sort((a, b) =>
+      parseFloat(a.average_price_total.replace(/[^\d.-]/g, '')) - parseFloat(b.average_price_total.replace(/[^\d.-]/g, ''))
+    );
+    setAvgPriceTotal(sortedData);
+    // console.log(data)
+  };
+
+  const fetchAvgPricePerM2 = async () => {
+    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-m2');
+    const data = await response.json();
+    const sortedData = data.sort((a, b) =>
+      parseFloat(a.average_price_per_m2.replace(/[^\d.-]/g, '')) - parseFloat(b.average_price_per_m2.replace(/[^\d.-]/g, ''))
+    );
+    setAvgPricePerM2(sortedData);
+    // console.log(data)
+  };
+
+  const formatLandPrice = (amount) => {
+    const oneAre = 100 * Math.round(amount);
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 2,
+    }).format(oneAre);
+  };
+
   return (
     <div className="base">
       <div>
@@ -47,35 +66,56 @@ const MainContent = () => {
       
       <div className='AnalyticCard'>
         {analyticData.map((data, index) => (
-        <AnalyticCard key={index} title={data.title} value={data.value} image={data.image} />
+          <AnalyticCard key={index} title={data.title} value={data.value} image={data.image} />
         ))}
       </div>
 
       <div className="main-content-container">
         <div className="main-content">
           <h2>Price Chart</h2>
-            <CustomCarousel />
+          <CustomCarousel />
         </div>
 
-        <div className='SummaryTab'>
-          <h2>Price Rankings</h2>
-          <h3>Highest to Lowest</h3>
-          {priceOverview.map((priceData, index) => (
-          <SummaryTab key={index} subdistrict={priceData.subdistrict} regency={priceData.regency} price={priceData.price}/>
-          ))}
-        </div>
-        
-        {/* <div className='SummaryTab'>
-          <h2>Land for Sale</h2>
-          <h3>Most to Least</h3>
-          {landforsaleOverview.map((landData, index) => (
-          <SummaryTab key={index} subdistrict={landData.subdistrict} regency={landData.regency} price={landData.total}/>
-          ))}
-        </div> */}
+        <div className="summary-card-container">
+          <div className='SummaryTab'>
+            <h2>Price Rankings</h2>
+            <h3>Lowest to Highest (per 100m<sup>2</sup>)</h3>
+            {datas.slice(0, 12).map((sortedData, index) => (
+              <SummaryTab
+                key={index}
+                subdistrict={sortedData.subdistrict}
+                regency={sortedData.regency}
+                price={formatLandPrice(sortedData.price_per_m2)}
+              />
+            ))}
+          </div>
 
+          <div className='SummaryTab'>
+            <h2>Average Price Total</h2>
+            <h3>For Each Regency</h3>
+            {avgPriceTotal.map((data, index) => (
+              <SummaryTab
+                key={index}
+                subdistrict={data.regency}
+                price={data.average_price_total}
+              />
+            ))}
+          </div>
+
+          <div className='SummaryTab'>
+            <h2>Average Price per m<sup>2</sup></h2>
+            <h3>For Each Regency</h3>
+            {avgPricePerM2.map((data, index) => (
+              <SummaryTab
+                key={index}
+                subdistrict={data.regency}
+                price={data.average_price_per_m2}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
-    
   );
 };
 
