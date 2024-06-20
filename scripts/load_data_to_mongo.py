@@ -6,11 +6,13 @@ from pymongo.server_api import ServerApi
 
 
 def load_to_mongo(file, col_name):
-    uri = "mongodb+srv://wahpram2607:Bangli123.@cluster0.yiobiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    localhost = 'mongodb://localhost:27017/'
+    cluster = 'mongodb+srv://wahpram2607:Bangli123.@cluster0.yiobiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+    
+    uri = localhost
 
     db_name = 'db_tanah_bali'
     collection_name = f'tanah_bali_{col_name}'
-
     
     try:
         client = MongoClient(uri, server_api=ServerApi('1'))
@@ -35,4 +37,4 @@ def load_to_mongo(file, col_name):
         
         
 if __name__ == '__main__':
-    load_to_mongo()
+    load_to_mongo('s', 'clean')
