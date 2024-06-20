@@ -6,7 +6,11 @@ from pymongo.server_api import ServerApi
 
 
 def get_data_mongo(collection_name):
-    uri = "mongodb+srv://wahpram2607:Bangli123.@cluster0.yiobiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    localhost = 'mongodb://localhost:27017/'
+    cluster = 'mongodb+srv://wahpram2607:Bangli123.@cluster0.yiobiyk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+    
+    uri = localhost
+    
     db_name = 'db_tanah_bali'
     
     try:
