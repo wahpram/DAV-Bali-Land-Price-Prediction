@@ -37,8 +37,8 @@ def get_data():
     
     for item in data:
         item.pop('_id', None)
-    
-    return jsonify(data)
+
+    return jsonify({'datas': data})
 
 
 @app.route('/api/data/avg-price-total/regency', methods=['GET'])
@@ -341,3 +341,7 @@ def predict_all():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# @app.route('/price-predict')
+# def pricepredict():
+#     return render_template('pricepredict.html')
