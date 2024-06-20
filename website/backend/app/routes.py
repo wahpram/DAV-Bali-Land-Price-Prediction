@@ -42,7 +42,7 @@ def get_data():
 
 
 @app.route('/api/data/avg-price-total/regency', methods=['GET'])
-def get_avg_price_total():
+def get_avg_price_total_regency():
     pipeline = [
         {"$group": {"_id": "$regency", "avg_price_total": {"$avg": "$price_total"}}}
     ]
@@ -59,8 +59,42 @@ def get_avg_price_total():
     return jsonify(response)
 
 
-@app.route('/api/data/avg-price-m2/regency', methods=['GET'])
+@app.route('/api/data/avg-price-total', methods=['GET'])
+def get_avg_price_total():
+    pipeline = [
+        {"$group": {"_id": None, "avg_price_total": {"$avg": "$price_total"}}}
+    ]
+    results = list(collection.aggregate(pipeline))
+    
+    if results:
+        avg_price_total = results[0]['avg_price_total']
+        avg_price_total_formatted = format_rupiah(avg_price_total)
+        response = {"average_price_total": avg_price_total_formatted}
+    else:
+        response = {"average_price_total": "N/A"}
+    
+    return jsonify(response)
+
+
+@app.route('/api/data/avg-price-m2', methods=['GET'])
 def get_avg_price_per_m2():
+    pipeline = [
+        {"$group": {"_id": None, "avg_price_per_m2": {"$avg": "$price_per_m2"}}}
+    ]
+    results = list(collection.aggregate(pipeline))
+    
+    if results:
+        avg_price_total = results[0]['avg_price_per_m2']
+        avg_price_total_formatted = format_rupiah(avg_price_total)
+        response = {"average_price_per_m2": avg_price_total_formatted}
+    else:
+        response = {"average_price_per_m2": "N/A"}
+    
+    return jsonify(response)
+
+
+@app.route('/api/data/avg-price-m2/regency', methods=['GET'])
+def get_avg_price_per_m2_regency():
     pipeline = [
         {"$group": {"_id": "$regency", "avg_price_per_m2": {"$avg": "$price_per_m2"}}}
     ]
@@ -78,8 +112,8 @@ def get_avg_price_per_m2():
     return jsonify(response)
 
 
-@app.route('/api/data/avg-price-per-m/<regency>', methods=['GET'])
-def get_avg_total_subd(regency):
+@app.route('/api/data/avg-price-per-m/regency/<regency>', methods=['GET'])
+def get_avg_per_m_subd(regency):
     pipeline = [
         {"$match": {"regency": regency}},
         {"$group": {
@@ -95,6 +129,29 @@ def get_avg_total_subd(regency):
         subdistrict_data = {
             "subdistrict": result["_id"],
             "average_price_per_m2": format_rupiah(result["avg_price_per_m2"])
+        }
+        response.append(subdistrict_data)
+
+    return jsonify(response)
+
+
+@app.route('/api/data/avg-price-total/regency/<regency>', methods=['GET'])
+def get_avg_total_subd(regency):
+    pipeline = [
+        {"$match": {"regency": regency}},
+        {"$group": {
+            "_id": "$subdistrict",
+            "avg_price_total": {"$avg": "$price_total"}
+        }}
+    ] 
+
+    results = list(collection.aggregate(pipeline))
+
+    response = []
+    for result in results:
+        subdistrict_data = {
+            "subdistrict": result["_id"],
+            "average_price_total": format_rupiah(result["avg_price_total"])
         }
         response.append(subdistrict_data)
 
