@@ -162,12 +162,12 @@ def get_avg_total_subd(regency):
 def predict_one():
     try:
         data = request.json
-        
+
         day = data.get('day')
         month = data.get('month')
         regency = data.get('regency')
         subdistrict = data.get('subdistrict')
-        
+
         if not all([day, month, regency, subdistrict]):
             return jsonify({'error': 'Invalid input data'}), 400
         
@@ -178,6 +178,11 @@ def predict_one():
             'regency': [regency]
         }
         new_df = pd.DataFrame(new_data)
+        columns_to_convert = ['month', 'day', 'subdistrict_encoded', 'regency_encoded']
+
+        for col in columns_to_convert:
+            if col in new_df.columns:
+                new_df[col] = new_df[col].astype(int)
         
         new_df['regency_encoded'] = new_df['regency'].apply(lambda x: regency_label_encoder.get(x, -1))
         new_df['subdistrict_encoded'] = new_df['subdistrict'].apply(lambda x: subdistrict_label_encoder.get(x, -1))
@@ -201,7 +206,6 @@ def predict_one():
             'rfr_pred': rfr_pred,
             'mlr_pred': mlr_pred
         }
-        
         return jsonify(predictions)
     
     except Exception as e:

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './MainContent.css';
+import './Dashboard.css';
 import AnalyticCard from './AnalyticCard';
 import SummaryTab from './SummaryTab';
 import CustomCarousel from './Carousel';
@@ -11,7 +11,7 @@ const analyticData = [
   { title: 'Land Sold This Month', value: "573", image: "https://img.icons8.com/ios-glyphs/30/FFFFFf/handshake--v1.png" },
 ];
 
-const MainContent = () => {
+const Dashboard = () => {
   const [datas, setDatas] = useState([]);
   const [avgPriceTotal, setAvgPriceTotal] = useState([]);
   const [avgPricePerM2, setAvgPricePerM2] = useState([]);
@@ -30,7 +30,7 @@ const MainContent = () => {
   };
 
   const fetchAvgPriceTotal = async () => {
-    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-total');
+    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-total/regency');
     const data = await response.json();
     const sortedData = data.sort((a, b) =>
       parseFloat(a.average_price_total.replace(/[^\d.-]/g, '')) - parseFloat(b.average_price_total.replace(/[^\d.-]/g, ''))
@@ -40,7 +40,7 @@ const MainContent = () => {
   };
 
   const fetchAvgPricePerM2 = async () => {
-    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-m2');
+    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-m2/regency');
     const data = await response.json();
     const sortedData = data.sort((a, b) =>
       parseFloat(a.average_price_per_m2.replace(/[^\d.-]/g, '')) - parseFloat(b.average_price_per_m2.replace(/[^\d.-]/g, ''))
@@ -119,4 +119,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default Dashboard;

@@ -1,40 +1,25 @@
-// src/App.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import MainContent from './components/MainContent';
+import PricePrediction from './components/PricePrediction'; // Assuming you have a PricePrediction component
 import './App.css';
+import Dashboard from './components/Dashboard';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('dashboard');
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="App">
       <div className="dashboard">
-        <Sidebar />
-        <MainContent />
+        <Sidebar onPageChange={handlePageChange} />
+        {currentPage === 'dashboard' && <Dashboard />}
+        {currentPage === 'pricePrediction' && <PricePrediction />}
       </div>
     </div>
   );
 }
 
 export default App;
-
-
-// // src/App.jsx
-// import React from 'react';
-// import Sidebar from './components/Sidebar';
-// import Header from './components/Header';
-// import MainContent from './components/MainContent';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <div className="dashboard">
-//         <Sidebar />
-//         <MainContent />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;

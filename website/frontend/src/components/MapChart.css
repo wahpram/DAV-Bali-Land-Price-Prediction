@@ -1,0 +1,64 @@
+/* src/components/MapChart.css */
+
+.map-path {
+  fill: #535858;
+  stroke: white;
+  stroke-width: 0.5;
+}
+
+.map-path:hover {
+  fill: #a6dfdd;
+  stroke-width: 1;
+}
+
+.label-box {
+  fill: #3ad3ce;
+  /* stroke: black; */
+  /* stroke-width: 0.5; */
+  pointer-events: none; /* Ensure the box is not interactive */
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center; /* Center text */
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.label-text {
+  font-weight: bold;
+  font-size: 1em;
+  fill: #f9f9f9;
+  pointer-events: none; /* Ensure the text is not interactive */
+}
+
+.additional-text {
+  font-weight: 100;
+  font-size: 0.8em;
+  fill: #f9f9f9;
+  pointer-events: none; /* Ensure the text is not interactive */
+}
+
+.map-path {
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+/* .map-path.hovered {
+  stroke: #000;
+  stroke-width: 2;
+} */
+
+.tooltip {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  display: none;
+  font-size: 0.9em;
+  color: #333;
+}

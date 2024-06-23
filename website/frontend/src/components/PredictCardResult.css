@@ -1,0 +1,65 @@
+.predict-card-result-base {
+    height: max-content; 
+    display: flex;
+    flex-direction: column;
+    padding: 0px 50px;
+    padding-bottom: 40px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    gap: 20px;
+}
+
+.predict-card-result-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+
+.predict-card-result-content{
+    background-color: #4FD1C5;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Center text */
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.predict-card-result-content h2 {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #2d2d2d;
+  }
+  
+.predict-card-result-content h3 {
+    font-weight: bold;
+    font-size: 1em;
+    color: #f9f9f9;
+}
+
+.predict-card-result-content-output-box {
+    width: 350px;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #f9f9f9;
+    border-radius: 5px;
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none; /* Remove default dropdown arrow for Safari */
+    -moz-appearance: none; /* Remove default dropdown arrow for Firefox */
+    background-size: 12px; /* Adjust size of custom arrow */
+    background-color: #f9f9f9; /* Ensure background color matches your design */
+    text-align: center; /* Center the text */
+    line-height: 1.5; /* Adjust line height to vertically center text */
+    font-weight: 100;
+    color: black;
+}
+
+.predict-card-result-content-output {
+    padding: 10px 50px;
+
+}
