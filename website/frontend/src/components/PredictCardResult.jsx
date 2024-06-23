@@ -14,7 +14,7 @@ const PredictCardResult = ({predictedPrices}) => {
                 
                 <h3>Predicted Price</h3>
                 <div className="predict-card-result-content-output-box">
-                    <h4>{predictedPrices.xgb_pred}</h4>
+                    <h4>{predictedPrices.xgb_pred}/m<sup>2</sup></h4>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@ const PredictCardResult = ({predictedPrices}) => {
                 
                 <h3>Predicted Price</h3>
                 <div className="predict-card-result-content-output-box">
-                    <h4>{predictedPrices.rfr_pred}</h4>
+                    <h4>{predictedPrices.rfr_pred}/m<sup>2</sup></h4>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@ const PredictCardResult = ({predictedPrices}) => {
                 
                 <h3>Predicted Price</h3>
                 <div className="predict-card-result-content-output-box">
-                    <h4>{predictedPrices.mlr_pred}</h4>
+                    <h4>{predictedPrices.mlr_pred}/m<sup>2</sup></h4>
                 </div>
             </div>
 

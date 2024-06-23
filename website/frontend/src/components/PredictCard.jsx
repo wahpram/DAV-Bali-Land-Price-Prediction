@@ -2,6 +2,35 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './PredictCard.css'; // Assuming you have CSS for styling
 
+const regencyData = [
+  { id: '1', name: 'Bangli', subdistricts: ['Kintamani', 'Bangli'] },
+  { id: '2', name: 'Jembrana', subdistricts:  ['Pekutatan', 'Jembrana', 'Negara', 'Mendoyo', 'Melaya'] },
+  { id: '3', name: 'Karangasem', subdistricts:  ['Manggis', 'Karangasem', 'Kubu', 'Selat', 'Abang', 'Sidemen', 'Bebandem', 'Rendang'] },
+  { id: '4', name: 'Klungkung', subdistricts: ['Nusa Penida', 'Banjarangkan', 'Klungkung', 'Dawan'] },
+  { id: '5', name: 'Buleleng', subdistricts: ['Banjar', 'Buleleng', 'Kubu Tambahan', 'Sukasada', 'Gerokgak', 'Sawan', 'Tejakula', 'Busung Biu', 'Seririt'] },
+  { id: '6', name: 'Tabanan', subdistricts: ['Selemadeg Barat', 'Kerambitan', 'Kediri', 'Selemadeg', 'Selemadeg Timur', 'Tabanan', 'Penebel', 'Marga', 'Pupuan'] },
+  { id: '7', name: 'Gianyar', subdistricts:  ['Ubud', 'Sukawati', 'Tampaksiring', 'Gianyar', 'Tegallalang', 'Blahbatuh', 'Payangan'] },
+  { id: '8', name: 'Denpasar', subdistricts: ['Denpasar Timur', 'Denpasar Barat', 'Denpasar Utara', 'Denpasar Selatan'] },
+  { id: '9', name: 'Badung', subdistricts: ['Kuta Selatan', 'Kuta', 'Kuta Utara', 'Mengwi', 'Abiansemal', 'Petang'] },
+];
+
+const years = Array.from({ length: 6 }, (_, i) => 2020 + i); // 2020 to 2025
+const months = [
+  { id: '1', name: 'January' },
+  { id: '2', name: 'February' },
+  { id: '3', name: 'March' },
+  { id: '4', name: 'April' },
+  { id: '5', name: 'May' },
+  { id: '6', name: 'June' },
+  { id: '7', name: 'July' },
+  { id: '8', name: 'August' },
+  { id: '9', name: 'September' },
+  { id: '10', name: 'October' },
+  { id: '11', name: 'November' },
+  { id: '12', name: 'December' },
+];
+const days = Array.from({ length: 31 }, (_, i) => i + 1); // 1 to 31
+
 const PredictCard = ({ onPredictionResult }) => {
   const [selectedRegency, setSelectedRegency] = useState('');
   const [selectedSubdistrict, setSelectedSubdistrict] = useState('');
@@ -12,6 +41,7 @@ const PredictCard = ({ onPredictionResult }) => {
 
   const handleRegencyChange = (event) => {
     setSelectedRegency(event.target.value);
+    setSelectedSubdistrict(''); // Reset subdistrict when regency changes
   };
 
   const handleSubdistrictChange = (event) => {
@@ -40,8 +70,6 @@ const PredictCard = ({ onPredictionResult }) => {
       subdistrict: selectedSubdistrict
     };
 
-    console.log(formData)
-
     axios.post('http://127.0.0.1:5000/api/predict-one', formData)
       .then(response => {
         onPredictionResult(response.data); // Send prediction result to parent component
@@ -52,6 +80,13 @@ const PredictCard = ({ onPredictionResult }) => {
         setIsLoading(false);
       });
   };
+
+  const getSubdistrictOptions = () => {
+    if (!selectedRegency) return [];
+    const regency = regencyData.find(r => r.id === selectedRegency);
+    return regency ? regency.subdistricts : [];
+  };
+
   return (
     <div className="predict-card-base">
       <div className="predict-card-header">
@@ -67,9 +102,9 @@ const PredictCard = ({ onPredictionResult }) => {
               onChange={handleRegencyChange}
             >
               <option value="" disabled>Select an option</option>
-              <option value="1">Regency 1</option>
-              <option value="2">Regency 2</option>
-              <option value="3">Regency 3</option>
+              {regencyData.map(regency => (
+                <option key={regency.id} value={regency.id}>{regency.name}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -80,11 +115,12 @@ const PredictCard = ({ onPredictionResult }) => {
             <select
               value={selectedSubdistrict}
               onChange={handleSubdistrictChange}
+              disabled={!selectedRegency}
             >
               <option value="" disabled>Select an option</option>
-              <option value="1">Subdistrict 1</option>
-              <option value="2">Subdistrict 2</option>
-              <option value="3">Subdistrict 3</option>
+              {getSubdistrictOptions().map((subdistrict, index) => (
+                <option key={index} value={subdistrict}>{subdistrict}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -97,9 +133,9 @@ const PredictCard = ({ onPredictionResult }) => {
               onChange={handleYearChange}
             >
               <option value="" disabled>Select an option</option>
-              <option value="1">Year 1</option>
-              <option value="2">Year 2</option>
-              <option value="3">Year 3</option>
+              {years.map((year, index) => (
+                <option key={index} value={year}>{year}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -112,9 +148,9 @@ const PredictCard = ({ onPredictionResult }) => {
               onChange={handleMonthChange}
             >
               <option value="" disabled>Select an option</option>
-              <option value="1">Month 1</option>
-              <option value="2">Month 2</option>
-              <option value="3">Month 3</option>
+              {months.map((month) => (
+                <option key={month.id} value={month.id}>{month.name}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -127,9 +163,9 @@ const PredictCard = ({ onPredictionResult }) => {
               onChange={handleDayChange}
             >
               <option value="" disabled>Select an option</option>
-              <option value="1">Day 1</option>
-              <option value="2">Day 2</option>
-              <option value="3">Day 3</option>
+              {days.map((day, index) => (
+                <option key={index} value={day}>{day}</option>
+              ))}
             </select>
           </div>
         </div>
