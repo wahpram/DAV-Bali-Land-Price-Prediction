@@ -17,6 +17,15 @@
     flex-wrap: wrap;
   }
 
+  .predict-main-content-chart-container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
 .base {
     width: 80%;
     margin: 35px 5px;

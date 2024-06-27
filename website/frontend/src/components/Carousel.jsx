@@ -5,8 +5,9 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './Carousel.css';
 
 import MapChart from './MapChart'; // Import MapChart component
+import BarChart from './BarChart';
 
-const CustomCarousel = () => {
+const CustomCarousel = ({ chart_data, data_origin }) => {
   return (
     <Carousel showArrows={true} showThumbs={false} infiniteLoop={true} autoPlay={true} interval={10000}>
       <div>
@@ -14,7 +15,7 @@ const CustomCarousel = () => {
         {/* <p className="legend">Map 1</p> */}
       </div>
       <div>
-        <MapChart />
+        <BarChart data={chart_data} type={data_origin}/>
         {/* <p className="legend">Map 2</p> */}
       </div>
       <div>

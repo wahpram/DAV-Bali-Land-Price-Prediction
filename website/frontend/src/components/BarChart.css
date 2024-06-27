@@ -1,0 +1,21 @@
+  
+.bar {
+fill: steelblue;
+}
+
+.bar:hover {
+fill: #a6dfdd;
+}
+
+.x-axis text{
+    font-weight: bold;
+    font-size: 2em;
+    color: #2d2d2d;
+}
+
+.y-axis text {
+    color: #2d2d2d;
+    font-weight: 500;
+    font-size: 1.5em;
+}
+

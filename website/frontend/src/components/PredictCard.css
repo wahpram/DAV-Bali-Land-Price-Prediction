@@ -6,14 +6,14 @@
     padding-bottom: 40px;
     background-color: #f9f9f9;
     border-radius: 15px;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  */
 }
+
 .predict-card-header {
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center;
   }
   
   .predict-card-content {
@@ -22,9 +22,9 @@
     padding: 27px 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
-    text-align: center; /* Center text */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -58,6 +58,14 @@
     align-content: center;
   }
 
+  
+.predict-card-content-input h3 {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #f9f9f9;
+}
+
+
   .predict-card-content-input-dropdown select {
     width: 250px;
     padding: 10px;
@@ -69,7 +77,9 @@
     background-size: 12px; /* Adjust size of custom arrow */
     background-color: #f9f9f9; /* Ensure background color matches your design */
     text-align: center; /* Center the text */
-    line-height: 1.5; /* Adjust line height to vertically center text */
+    font-weight: bold;
+    font-size: 0.96em;
+    color: #2d2d2d;
   }
 
   .predict-dropdown {

@@ -4,22 +4,18 @@ import AnalyticCard from './AnalyticCard';
 import SummaryTab from './SummaryTab';
 import CustomCarousel from './Carousel';
 
-const analyticData = [
-  { title: 'Average Land Price in Bali', value: "$54,000", image: "https://img.icons8.com/ios-filled/100/FFFFFf/money-bag.png" },
-  { title: 'Land Prices Checked This Month', value: "2,300", image: "https://img.icons8.com/ios-filled/50/FFFFFf/nui2.png" },
-  { title: 'New Lands', value: "2,300", image: "https://img.icons8.com/ios-filled/50/FFFFFF/country.png" },
-  { title: 'Land Sold This Month', value: "573", image: "https://img.icons8.com/ios-glyphs/30/FFFFFf/handshake--v1.png" },
-];
 
 const Dashboard = () => {
   const [datas, setDatas] = useState([]);
   const [avgPriceTotal, setAvgPriceTotal] = useState([]);
   const [avgPricePerM2, setAvgPricePerM2] = useState([]);
+  const [avgPriceTotalPerM2, setAvgPriceTotalPerM2] = useState([]);
 
   useEffect(() => {
     fetchDatas();
     fetchAvgPriceTotal();
     fetchAvgPricePerM2();
+    fetchAvgPriceTotalPerM2();
   }, []);
 
   const fetchDatas = async () => {
@@ -27,6 +23,7 @@ const Dashboard = () => {
     const data = await response.json();
     const sortedData = data.datas.sort((a, b) => a.price_per_m2 - b.price_per_m2);
     setDatas(sortedData);
+    console.log(sortedData)
   };
 
   const fetchAvgPriceTotal = async () => {
@@ -49,6 +46,13 @@ const Dashboard = () => {
     // console.log(data)
   };
 
+  const fetchAvgPriceTotalPerM2= async () => {
+    const response = await fetch('http://127.0.0.1:5000/api/data/avg-price-m2');
+    const data = await response.json();
+    setAvgPriceTotalPerM2(data);
+    // console.log(data)
+  };
+
   const formatLandPrice = (amount) => {
     const oneAre = 100 * Math.round(amount);
     return new Intl.NumberFormat('id-ID', {
@@ -57,6 +61,15 @@ const Dashboard = () => {
       minimumFractionDigits: 2,
     }).format(oneAre);
   };
+
+  
+  const analyticData = [
+    { title: 'Average Land Price in Bali (m²)', value: `${avgPriceTotalPerM2.average_price_per_m2}`, image: "https://img.icons8.com/ios-filled/100/FFFFFf/money-bag.png" },
+    { title: 'Lowest Land Price per (100m²)', value: datas.length > 0 ? formatLandPrice(datas[0].price_per_m2) : 'Loading...', image: "https://img.icons8.com/ios-filled/50/FFFFFf/nui2.png" },
+    { title: 'Highest Land Price per (100m²)', value: datas.length > 0 ? formatLandPrice(datas[datas.length - 1].price_per_m2) : 'Loading...', image: "https://img.icons8.com/ios-filled/50/FFFFFF/country.png" },
+    { title: 'Land For Sale', value: datas.length > 0 ? datas.length : 'Loading...', image: "https://img.icons8.com/ios-glyphs/30/FFFFFf/handshake--v1.png" },
+  ];
+
 
   return (
     <div className="base">
@@ -72,8 +85,8 @@ const Dashboard = () => {
 
       <div className="main-content-container">
         <div className="main-content">
-          <h2>Price Chart</h2>
-          <CustomCarousel />
+          <h2>Land Price Overview</h2>
+          <CustomCarousel chart_data={avgPricePerM2} data_origin="dashboard"/>
         </div>
 
         <div className="summary-card-container">

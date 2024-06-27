@@ -35,10 +35,16 @@
     font-size: 1.2em;
     color: #2d2d2d;
   }
+
+.predict-card-result-content h4 {
+    font-weight: bold;
+    font-size: 1em;
+    color: #2d2d2d;
+  }
   
 .predict-card-result-content h3 {
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1.2em;
     color: #f9f9f9;
 }
 
@@ -56,7 +62,7 @@
     text-align: center; /* Center the text */
     line-height: 1.5; /* Adjust line height to vertically center text */
     font-weight: 100;
-    color: black;
+    color: #2d2d2d;
 }
 
 .predict-card-result-content-output {
