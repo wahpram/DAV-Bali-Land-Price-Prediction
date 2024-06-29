@@ -14,7 +14,6 @@ const regencyData = [
   { id: '9', name: 'Badung', subdistricts: ['Kuta Selatan', 'Kuta', 'Kuta Utara', 'Mengwi', 'Abiansemal', 'Petang'] },
 ];
 
-const years = Array.from({ length: 6 }, (_, i) => 2020 + i); // 2020 to 2025
 const months = [
   { id: '1', name: 'January' },
   { id: '2', name: 'February' },
@@ -34,9 +33,8 @@ const days = Array.from({ length: 31 }, (_, i) => i + 1); // 1 to 31
 const PredictCard = ({ onPredictionResult }) => {
   const [selectedRegency, setSelectedRegency] = useState('');
   const [selectedSubdistrict, setSelectedSubdistrict] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
-  const [selectedDay, setSelectedDay] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegencyChange = (event) => {
@@ -48,23 +46,19 @@ const PredictCard = ({ onPredictionResult }) => {
     setSelectedSubdistrict(event.target.value);
   };
 
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
-  };
-
   const handleMonthChange = (event) => {
     setSelectedMonth(event.target.value);
   };
 
-  const handleDayChange = (event) => {
-    setSelectedDay(event.target.value);
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
   };
 
   const handleButtonClick = () => {
     setIsLoading(true);
 
     const formData = {
-      day: selectedDay,
+      day: selectedDate,
       month: selectedMonth,
       regency: selectedRegency,
       subdistrict: selectedSubdistrict
@@ -126,21 +120,6 @@ const PredictCard = ({ onPredictionResult }) => {
         </div>
 
         <div className='predict-card-content-input'>
-          <h3>Year</h3>
-          <div className="predict-card-content-input-dropdown">
-            <select
-              value={selectedYear}
-              onChange={handleYearChange}
-            >
-              <option value="" disabled>Select an option</option>
-              {years.map((year, index) => (
-                <option key={index} value={year}>{year}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className='predict-card-content-input'>
           <h3>Month</h3>
           <div className="predict-card-content-input-dropdown">
             <select
@@ -156,11 +135,11 @@ const PredictCard = ({ onPredictionResult }) => {
         </div>
 
         <div className='predict-card-content-input'>
-          <h3>Day</h3>
+          <h3>Date</h3>
           <div className="predict-card-content-input-dropdown">
             <select
-              value={selectedDay}
-              onChange={handleDayChange}
+              value={selectedDate}
+              onChange={handleDateChange}
             >
               <option value="" disabled>Select an option</option>
               {days.map((day, index) => (

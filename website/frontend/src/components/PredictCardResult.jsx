@@ -1,8 +1,8 @@
 import React from "react";
 import './PredictCardResult.css'
 
-const PredictCardResult = ({predictedPrices}) => {
-    console.log('Predicted Prices:', predictedPrices);
+const PredictCardResult = ({data}) => {
+    console.log('Predicted Card Result JSX:', data);
     return (
       <div className="predict-card-result-base">
         <div className="predict-card-result-header"> 
@@ -14,7 +14,7 @@ const PredictCardResult = ({predictedPrices}) => {
                 
                 <h3>Predicted Price</h3>
                 <div className="predict-card-result-content-output-box">
-                    <h4>{predictedPrices.xgb_pred}/m<sup>2</sup></h4>
+                    <h4>{data.xgb_pred}/m<sup>2</sup></h4>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@ const PredictCardResult = ({predictedPrices}) => {
                 
                 <h3>Predicted Price</h3>
                 <div className="predict-card-result-content-output-box">
-                    <h4>{predictedPrices.rfr_pred}/m<sup>2</sup></h4>
+                    <h4>{data.rfr_pred}/m<sup>2</sup></h4>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@ const PredictCardResult = ({predictedPrices}) => {
                 
                 <h3>Predicted Price</h3>
                 <div className="predict-card-result-content-output-box">
-                    <h4>{predictedPrices.mlr_pred}/m<sup>2</sup></h4>
+                    <h4>{data.mlr_pred}/m<sup>2</sup></h4>
                 </div>
             </div>
 
