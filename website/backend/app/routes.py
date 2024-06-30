@@ -163,17 +163,15 @@ def predict_one():
     try:
         data = request.json
 
-        day = data.get('day')
         month = data.get('month')
         regency = data.get('regency')
         subdistrict = data.get('subdistrict')
 
-        if not all([day, month, regency, subdistrict]):
+        if not all([month, regency, subdistrict]):
             return jsonify({'error': 'Invalid input data'}), 400
         
         new_data = {
             'month': [month],
-            'day': [day],
             'subdistrict': [subdistrict],
             'regency': [regency]
         }
@@ -218,10 +216,9 @@ def predict_all_subdistricts():
         data = request.json
         
         regency = data.get('regency')
-        day = data.get('day')
         month = data.get('month')
         
-        if not regency or not day or not month:
+        if not all([month, regency]):
             return jsonify({'error': 'Invalid input data'}), 400
         
         pipeline = [
@@ -238,7 +235,6 @@ def predict_all_subdistricts():
         for subdistrict in subdistricts:
             new_data = {
                 'month': [month],
-                'day': [day],
                 'subdistrict': [subdistrict],
                 'regency': [regency]
             }
@@ -280,10 +276,9 @@ def predict_all():
     try:
         data = request.json
         
-        day = data.get('day')
         month = data.get('month')
         
-        if not day or not month:
+        if not month:
             return jsonify({'error': 'Invalid input data'}), 400
         
         # MongoDB aggregation pipeline to fetch distinct combinations of regency and subdistrict
@@ -302,7 +297,6 @@ def predict_all():
             
             new_data = {
                 'month': [month],
-                'day': [day],
                 'subdistrict': [subdistrict],
                 'regency': [regency]
             }
