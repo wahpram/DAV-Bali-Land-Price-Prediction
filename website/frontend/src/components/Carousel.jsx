@@ -9,7 +9,7 @@ import BarChart from './BarChart';
 
 const CustomCarousel = ({ chart_data, data_origin }) => {
   return (
-    <Carousel showArrows={true} showThumbs={false} infiniteLoop={true} autoPlay={true} interval={10000}>
+    <Carousel showArrows={true} showThumbs={false} infiniteLoop={true} autoPlay={true} interval={3000}>
       <div>
         <MapChart />
         {/* <p className="legend">Map 1</p> */}

@@ -15,26 +15,26 @@ const regencyData = [
 ];
 
 const months = [
-  { id: '1', name: 'January' },
-  { id: '2', name: 'February' },
-  { id: '3', name: 'March' },
-  { id: '4', name: 'April' },
-  { id: '5', name: 'May' },
-  { id: '6', name: 'June' },
-  { id: '7', name: 'July' },
-  { id: '8', name: 'August' },
-  { id: '9', name: 'September' },
-  { id: '10', name: 'October' },
-  { id: '11', name: 'November' },
-  { id: '12', name: 'December' },
+  { id: 1, name: 'January' },
+  { id: 2, name: 'February' },
+  { id: 3, name: 'March' },
+  { id: 4, name: 'April' },
+  { id: 5, name: 'May' },
+  { id: 6, name: 'June' },
+  { id: 7, name: 'July' },
+  { id: 8, name: 'August' },
+  { id: 9, name: 'September' },
+  { id: 10, name: 'October' },
+  { id: 11, name: 'November' },
+  { id: 12, name: 'December' },
 ];
-const days = Array.from({ length: 31 }, (_, i) => i + 1); // 1 to 31
+// const days = Array.from({ length: 31 }, (_, i) => i + 1); // 1 to 31
 
 const PredictCard = ({ onPredictionResult }) => {
   const [selectedRegency, setSelectedRegency] = useState('');
   const [selectedSubdistrict, setSelectedSubdistrict] = useState('');
   const [selectedMonth, setSelectedMonth] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
+  // const [selectedDate, setSelectedDate] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegencyChange = (event) => {
@@ -50,15 +50,14 @@ const PredictCard = ({ onPredictionResult }) => {
     setSelectedMonth(event.target.value);
   };
 
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
-  };
+  // const handleDateChange = (event) => {
+  //   setSelectedDate(event.target.value);
+  // };
 
   const handleButtonClick = () => {
     setIsLoading(true);
 
     const formData = {
-      day: selectedDate,
       month: selectedMonth,
       regency: selectedRegency,
       subdistrict: selectedSubdistrict
@@ -133,7 +132,7 @@ const PredictCard = ({ onPredictionResult }) => {
             </select>
           </div>
         </div>
-
+{/* 
         <div className='predict-card-content-input'>
           <h3>Date</h3>
           <div className="predict-card-content-input-dropdown">
@@ -147,7 +146,7 @@ const PredictCard = ({ onPredictionResult }) => {
               ))}
             </select>
           </div>
-        </div>
+        </div> */}
       </div>
       <button onClick={handleButtonClick} className="predict-button" disabled={isLoading}>
         {isLoading ? 'Predicting...' : 'Predict'}
