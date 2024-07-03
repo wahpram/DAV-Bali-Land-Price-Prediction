@@ -176,7 +176,7 @@ def predict_one():
             'regency': [regency]
         }
         new_df = pd.DataFrame(new_data)
-        columns_to_convert = ['month', 'day', 'subdistrict_encoded', 'regency_encoded']
+        columns_to_convert = ['month']
 
         for col in columns_to_convert:
             if col in new_df.columns:
