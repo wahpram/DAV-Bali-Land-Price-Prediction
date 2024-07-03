@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './PredictCard.css'; // Assuming you have CSS for styling
+import './PredictCard.css'; 
 
 const regencyData = [
   { id: '1', name: 'Bangli', subdistricts: ['Kintamani', 'Bangli'] },

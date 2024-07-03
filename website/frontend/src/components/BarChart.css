@@ -1,6 +1,6 @@
   
 .bar {
-fill: steelblue;
+fill: #3ad3ce;
 }
 
 .bar:hover {
@@ -8,14 +8,56 @@ fill: #a6dfdd;
 }
 
 .x-axis text{
-    font-weight: bold;
-    font-size: 2em;
+    font-weight: lighter;
+    font-size: 1.8em;
     color: #2d2d2d;
 }
 
 .y-axis text {
     color: #2d2d2d;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 1.5em;
 }
 
+
+.label-box {
+    fill: #3ad3ce;
+    /* stroke: black; */
+    /* stroke-width: 0.5; */
+    pointer-events: none; /* Ensure the box is not interactive */
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Center text */
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .label-text {
+    font-weight: bold;
+    font-size: 1em;
+    fill: #f9f9f9;
+    pointer-events: none; /* Ensure the text is not interactive */
+  }
+  
+  .additional-text {
+    font-weight: 100;
+    font-size: 0.8em;
+    fill: #f9f9f9;
+    pointer-events: none; /* Ensure the text is not interactive */
+  }
+
+  .tooltip {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    display: none;
+    font-size: 0.9em;
+    color: #333;
+  }
