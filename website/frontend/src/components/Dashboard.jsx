@@ -10,12 +10,18 @@ const Dashboard = () => {
   const [avgPriceTotal, setAvgPriceTotal] = useState([]);
   const [avgPricePerM2, setAvgPricePerM2] = useState([]);
   const [avgPriceTotalPerM2, setAvgPriceTotalPerM2] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDatas();
-    fetchAvgPriceTotal();
-    fetchAvgPricePerM2();
-    fetchAvgPriceTotalPerM2();
+    const fetchData = async () => {
+      await fetchDatas();
+      await fetchAvgPriceTotal();
+      await fetchAvgPricePerM2();
+      await fetchAvgPriceTotalPerM2();
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
 
   const fetchDatas = async () => {
@@ -23,7 +29,7 @@ const Dashboard = () => {
     const data = await response.json();
     const sortedData = data.datas.sort((a, b) => a.price_per_m2 - b.price_per_m2);
     setDatas(sortedData);
-    console.log(sortedData)
+    // console.log(sortedData)
   };
 
   const fetchAvgPriceTotal = async () => {
@@ -33,7 +39,7 @@ const Dashboard = () => {
       parseFloat(a.average_price_total.replace(/[^\d.-]/g, '')) - parseFloat(b.average_price_total.replace(/[^\d.-]/g, ''))
     );
     setAvgPriceTotal(sortedData);
-    // console.log(data)
+    // console.log(sortedData)
   };
 
   const fetchAvgPricePerM2 = async () => {
@@ -66,33 +72,28 @@ const Dashboard = () => {
     return new Intl.NumberFormat('id-ID').format(amount);
   };
 
-  
   const analyticData = [
-    { 
-      title: 'Average Land Price in Bali (m²)', 
-      value: `${avgPriceTotalPerM2.average_price_per_m2}`, 
+    { title: 'Average Land Price in Bali (m²)', 
+      value: avgPriceTotalPerM2.average_price_per_m2 !== undefined ? avgPriceTotalPerM2.average_price_per_m2 : 'Loading...',
       image: "https://img.icons8.com/ios-filled/100/FFFFFf/money-bag.png" 
     },
 
-    { 
-      title: 'Lowest Land Price per (100m²)', 
+    { title: 'Lowest Land Price per (100m²)', 
       value: datas.length > 0 ? formatLandPrice(datas[0].price_per_m2) : 'Loading...', 
       image: "https://img.icons8.com/ios-filled/50/FFFFFf/nui2.png" 
     },
 
-    { 
-      title: 'Highest Land Price per (100m²)', 
+    { title: 'Highest Land Price per (100m²)', 
       value: datas.length > 0 ? formatLandPrice(datas[datas.length - 1].price_per_m2) : 'Loading...', 
       image: "https://img.icons8.com/ios-filled/50/FFFFFF/country.png" 
     },
-    
+
     { 
       title: 'Land For Sale', 
       value: datas.length > 0 ? `${formatTotalLand(datas.length)} Lands` : 'Loading...', 
       image: "https://img.icons8.com/ios-glyphs/30/FFFFFf/handshake--v1.png" 
     },
   ];
-
 
   return (
     <div className="base">
@@ -108,8 +109,11 @@ const Dashboard = () => {
 
       <div className="main-content-container">
         <div className="main-content">
-          <h2>Land Price Overview</h2>
-          <CustomCarousel chart_data={avgPricePerM2} data_origin="dashboard"/>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <CustomCarousel map_chart_data={datas} bar_chart_data={avgPricePerM2} data_origin="dashboard"/>
+          )}
         </div>
 
         <div className="summary-card-container">
@@ -127,8 +131,8 @@ const Dashboard = () => {
           </div>
 
           <div className='SummaryTab'>
-            <h2>Average Price Total</h2>
-            <h3>For Each Regency</h3>
+            <h2>Average Price per 100m<sup>2</sup></h2>
+            <h3>For Each Regency </h3>
             {avgPriceTotal.map((data, index) => (
               <SummaryTab
                 key={index}

@@ -12,10 +12,10 @@
 }
 
 .label-box {
-  fill: #3ad3ce;
+  fill: #333;
   /* stroke: black; */
   /* stroke-width: 0.5; */
-  pointer-events: none; /* Ensure the box is not interactive */
+  pointer-events: none;
   padding: 20px 50px;
   display: flex;
   flex-direction: column;
@@ -23,36 +23,34 @@
   align-items: center; /* Center horizontally */
   text-align: center; /* Center text */
   border-radius: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 95%;
+  
 }
 
 .label-text {
   font-weight: bold;
+  padding: 10px 10px;
   font-size: 1em;
   fill: #f9f9f9;
-  pointer-events: none; /* Ensure the text is not interactive */
+  pointer-events: none;
 }
 
 .additional-text {
-  font-weight: 100;
+  font-weight: 500;
   font-size: 0.8em;
   fill: #f9f9f9;
-  pointer-events: none; /* Ensure the text is not interactive */
+  pointer-events: none;
 }
 
 .map-path {
-  stroke: #fff;
+  stroke: #f9f9f9;
   stroke-width: 1;
 }
 
-/* .map-path.hovered {
-  stroke: #000;
-  stroke-width: 2;
-} */
-
 .tooltip {
   position: absolute;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 5px;
@@ -61,4 +59,5 @@
   display: none;
   font-size: 0.9em;
   color: #333;
+  
 }
